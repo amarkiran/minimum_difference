@@ -54,7 +54,7 @@ class arrayValue(generics.ListCreateAPIView):
                     listArray.append(self.loopArray(indexValue, datas))
 
             # print(listArray)
-            return Response('loop the data sucesscfully', True)
+            return Response(listArray, True)
         except:
             raise APIException(traceback.print_exc())
 
