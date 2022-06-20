@@ -36,3 +36,45 @@ class Minimum_difference(generics.ListCreateAPIView):
             return Response(result, True)
         except:
             raise APIException(traceback.print_exc())
+
+class arrayValue(generics.ListCreateAPIView):
+
+    def post(self, request):
+        try:
+            import json as j
+            data = j.loads(request.body)
+            datas = data['matrix']
+            listArray = []
+            for l in range(datas):
+                if len(listArray) == 0:
+                    listArray.append(self.loopArray(l, datas))
+                else:
+                    concateArray = sum(listArray, [])
+                    indexValue = len(concateArray)
+                    listArray.append(self.loopArray(indexValue, datas))
+
+            # print(listArray)
+            return Response('loop the data sucesscfully', True)
+        except:
+            raise APIException(traceback.print_exc())
+
+
+    def loopArray(self,index,length):
+        # initial = 1
+        arrayValue = []
+        for k in range(length):
+            modolo = k+index
+            if modolo % 2 == 0:
+                print(k , k+index, 'if')
+                arrayValue.append(1)
+            else :
+                print(k, k + index, 'else')
+                arrayValue.append(0)
+        #     # if len(arrayValue) == 0:
+        #     #     arrayValue.append(initial)
+        #     # else:
+        #     #     value = arrayValue[k-1] - initial
+        #     #     arrayValue.append(value)
+        #     #     print(arrayValue)
+        # print(arrayValue[0])
+        return arrayValue
